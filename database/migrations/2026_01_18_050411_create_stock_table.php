@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estoques', function (Blueprint $table) {
+        Schema::create('stock', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string("name");
+            $table->string("description");
+            $table->string("localization");
+            $table->boolean("active");
+            $table->unsignedBigInteger('id_administrator_fk');
+            $table->foreign('id_administrator_fk')->on('adminstrators')->references('id');
         });
     }
 
