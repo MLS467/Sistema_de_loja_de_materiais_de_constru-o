@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -11,10 +12,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        return [
-            "tijolo" => 50,
-            "cimento" => 30
-        ];
+        return response()->json(["status" => true, "data" => Stock::all()], 200);
     }
 
     /**
@@ -22,15 +20,23 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = $request->all();
+
+        $value = Stock::create($result);
+
+        if (!$value)
+            return response()->json(["status" => false, "message" => "Não é possível inserir no estoque."], 403);
+
+
+        return response()->json(["status" => true, "message" => "inserido com sucesso."], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        return response()->json(["status" => true, "data" => $request->all()], 200);
     }
 
     /**

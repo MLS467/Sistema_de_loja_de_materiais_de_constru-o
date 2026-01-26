@@ -1,0 +1,3 @@
+(x) adicionar produtos no stock
+() adicionar clientes
+() cliente comprar produtos
